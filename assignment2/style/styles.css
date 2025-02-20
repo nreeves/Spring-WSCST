@@ -41,12 +41,12 @@ body {
     text-align: right;
 }
 .banner h2 {
-    color: #d9534f;
+    color: black;
     font-size: 2.5em;
     margin-bottom: 10px;
 }
 .banner h3 {
-    color: #5bc0de;
+    color: black;
     font-size: 1.8em;
     margin-bottom: 15px;
 }
@@ -56,15 +56,15 @@ body {
 }
 .btn-reserve {
     background-color: #5cb85c;
-    color: white;
+    color: ;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     font-size: 1.2em;
     cursor: pointer;
 }
-.btn-reserve:hover {
-    background-color: #4cae4c;
+   
+.text-right{ 
+    color: red; 
 }
-</style>
 </style>
