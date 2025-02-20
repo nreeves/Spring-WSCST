@@ -28,4 +28,43 @@ body {
     display: inline-block;
     margin-top: 20px;
 }
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+.banner {
+    background-color: #f8f9fa;
+    padding: 40px;
+    border-radius: 10px;
+    margin: 40 0;
+    text-align: right;
+}
+.banner h2 {
+    color: #d9534f;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+.banner h3 {
+    color: #5bc0de;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+.banner p {
+    font-size: 1.2em;
+    color: #333;
+}
+.btn-reserve {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+.btn-reserve:hover {
+    background-color: #4cae4c;
+}
+</style>
 </style>
