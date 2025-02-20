@@ -66,4 +66,8 @@ body {
 .text-right{ 
     color: red; 
 }
+
+.btn-social-icon {
+    font-size: 1.5em;
+}
 </style>
