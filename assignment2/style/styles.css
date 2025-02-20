@@ -23,7 +23,7 @@ body {
 }
 .reserve-container {
     text-align: center;
-    border: 2px solid #ff9800;
+    border: 2px solid;
     padding: 15px;
     display: inline-block;
     margin-top: 20px;
