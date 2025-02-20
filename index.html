@@ -66,26 +66,25 @@
             </div>
        </div>
 
-       <div class="container reserve-table text-center">
+       <!-- reservation form -->
+       <div class="container reserve-table text-center" id="reserve-form">
         <h2>Reserve a Table</h2>
-        <table class="reservation-table">
-            <tr>
-                <th>Number of Guests</th>
-                <th>Date and Time</th>
-                <th>Date</th>
-                <th>Time</th>
-            </tr>
-            <tr>
-                <td><input type="number" placeholder="Number of Guests"></td>
-                <td><input type="datetime-local"></td>
-                <td><input type="date"></td>
-                <td><input type="time"></td>
-            </tr>
-        </table>
-        <button class="btn-reserve">Reserve</button>
-    </div>
-
-    </div>
+        <form>
+            <div class="form-guest">
+                <label> # of Guests </label>
+                <div>
+                    <input type="radio" name="guests" value="1">1
+                    <input type="radio" name="guests" value="2">2
+                    <input type="radio" name="guests" value="3">3
+                    <input type="radio" name="guests" value="4">4
+            </div>
+            </div>
+            <div class="form-date">
+                <label> Date </label>
+                <input type="date" name="form-date">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
     <footer class="footer mt-5">
         <div class="container">
@@ -139,3 +138,12 @@
 </body>
 
 </html>
+
+<!-- missing:
+ 
+- did reservation table wrong
+
+
+
+
+-->
