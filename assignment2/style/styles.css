@@ -1,0 +1,31 @@
+<style>
+body {
+    background-color: #6f42c1;
+    color: white;
+}
+.jumbotron {
+    background-color: #6f42c1;
+    color: white;
+    padding: 2rem 1rem;
+}
+.navbar {
+    background-color: #512da8;
+}
+.btn-reserve {
+    background-color: #ffc107;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: block;
+    width: fit-content;
+    margin-top: 10px;
+}
+.reserve-container {
+    text-align: center;
+    border: 2px solid #ff9800;
+    padding: 15px;
+    display: inline-block;
+    margin-top: 20px;
+}
+</style>
