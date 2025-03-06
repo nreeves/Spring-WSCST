@@ -1,0 +1,51 @@
+header{
+    background-color: #9575cd;
+}
+
+footer{
+    background-color: #d1c4e9;
+}
+
+small{
+    font-size: 17px;
+}
+
+nav{
+    background-color: #5133a5;
+}
+
+#alberto{
+    height: 119.34px;
+    width: 119.34px;
+}
+
+#buffet{
+    height: 119.34px;
+    width: 119.34px;
+}
+
+#form{
+    border-color:black;
+}
+
+#modal-foot{
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+
+
+
+
+
+
+
+
+@media (min-width: 992px) { 
+
+    button{
+        margin: 15%;
+    }
+
+ }
