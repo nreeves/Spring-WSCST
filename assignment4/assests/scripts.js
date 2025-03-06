@@ -1,10 +1,9 @@
-$(document).ready(function() {
-$("#CustomModal").modal();
+document.getElementById('reserveTableButton').addEventListener('click', function () {
+    const reserveTableModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+    reserveTableModal.show();
 });
 
-const customModal = document.getElementById('customModal')
-const customInput = document.getElementById('customInput')
-
-customModal.addEventListener('shown.bs.modal', () => {
-customInput.focus()
-})
+document.getElementById('loginLink').addEventListener('click', function () {
+    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    loginModal.show();
+});
