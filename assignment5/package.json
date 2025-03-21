@@ -1,5 +1,5 @@
 {
-  "name": "assignment5",
+  "name": "confusion",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,8 +8,8 @@
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^13.2.1",
     "bootstrap": "4.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
     "react-popper": "0.9.2",
     "react-scripts": "5.0.1",
     "reactstrap": "5.0.0",
