@@ -1,46 +1,107 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchDishes } from '../redux/ActionCreators';
 import Menu from './MenuComponent';
 import DishDetail from './DishdetailComponent';
-import { DISHES } from '../shared/dishes';
-import { COMMENTS } from '../shared/comments.js';  // Import comments data
+import Home from './HomeComponent';
+import Contact from './ContactComponent';
+import About from './AboutComponent';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
+import { withRouter } from 'react-router-dom';
+import { actions } from 'react-redux-form';
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dishes: DISHES,
-            comments: COMMENTS,  // Add comments to state
-            selectedDish: null
-        };
+  componentDidMount() {
+    this.props.fetchDishes();
+  }
+
+  handleDishClick = (dishId) => {
+    this.props.history.push(`/menu/${dishId}`);
+  };
+
+  render() {
+    const { dishes, isLoading, errMess, comments, promotions, leaders } = this.props;
+
+    if (isLoading) {
+      return <div>Loading...</div>;
     }
 
-    onDishSelect(dishId) {
-        this.setState({ selectedDish: dishId });
+    if (errMess) {
+      return <div>{errMess}</div>;
     }
 
-    render() {
-        const selectedDish = this.state.dishes.find(dish => dish.id === this.state.selectedDish);
-        const selectedComments = this.state.comments.filter(comment => comment.dishId === this.state.selectedDish);
+    const featuredDish = dishes.dishes.filter((dish) => dish.featured)[0];
+    const featuredPromotion = promotions.filter((promo) => promo.featured)[0];
+    const featuredLeader = leaders.filter((leader) => leader.featured)[0];
 
-        return (
-            <div>
-                <Navbar dark color="primary">
-                    <div className="container">
-                        <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-                    </div>
-                </Navbar>
-                <Menu 
-                    dishes={this.state.dishes} 
-                    onClick={(dishId) => this.onDishSelect(dishId)} 
+    return (
+      <div>
+        <Header />
+        <Switch>
+          <Route
+            path="/home"
+            render={() => (
+              <Home
+                dish={featuredDish}
+                promotion={featuredPromotion}
+                leader={featuredLeader}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/contactus"
+            component={() => (
+              <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+            )}
+          />
+          <Route exact path="/aboutus" component={About} />
+          <Route
+            exact
+            path="/menu"
+            render={() => (
+              <Menu
+                dishes={dishes.dishes}
+                onClick={this.handleDishClick}
+              />
+            )}
+          />
+          <Route
+            path="/menu/:dishId"
+            render={({ match }) => {
+              const dishId = parseInt(match.params.dishId, 10);
+              const selectedDish = dishes.dishes.find((dish) => dish.id === dishId);
+              const selectedComments = comments.filter((comment) => comment.dishId === dishId);
+              return (
+                <DishDetail
+                  dish={selectedDish}
+                  comments={selectedComments}
                 />
-                <DishDetail 
-                    dish={selectedDish} 
-                    comments={selectedComments}  // Pass comments as a prop
-                />
-            </div>
-        );
-    }
+              );
+            }}
+          />
+          <Redirect to="/home" />
+        </Switch>
+        <Footer />
+      </div>
+    );
+  }
 }
 
-export default Main;
+const mapStateToProps = (state) => ({
+  dishes: state.dishes,
+  comments: state.comments,
+  promotions: state.promotions,
+  leaders: state.leaders,
+  isLoading: state.dishes.isLoading,
+  errMess: state.dishes.errMess,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchDishes: () => dispatch(fetchDishes()),
+  resetFeedbackForm: () => dispatch(actions.reset('feedback'))
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
