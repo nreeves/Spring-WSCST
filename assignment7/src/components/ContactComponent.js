@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import { connect } from 'react-redux';  
 import { addComment } from '../redux/ActionCreators';  
+
 class Contact extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +13,8 @@ class Contact extends Component {
             email: '',
             agree: false,
             contactType: 'Tel.',
-            message: ''
+            message: '',
+            errorMessage: '' // State to hold error messages
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,16 +26,22 @@ class Contact extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+        if ((name === 'firstname' || name === 'lastname') && value.length > 15) {
+            this.setState({
+                errorMessage: "Name cannot exceed 15 characters."
+            });
+        } else {
+            this.setState({
+                [name]: value,
+                errorMessage: '' 
+            });
+        }
     }
 
     handleSubmit(event) {
         console.log('Current State is: ' + JSON.stringify(this.state));
         alert('Current State is: ' + JSON.stringify(this.state));
 
-        
         this.props.addComment(this.state);  
 
         event.preventDefault();
@@ -65,6 +73,13 @@ class Contact extends Component {
                     <div className="col-12 col-md-9">
                         <h3>Send us your Feedback</h3>
                         <Form onSubmit={this.handleSubmit}>
+                            {/* Error Message */}
+                            {this.state.errorMessage && (
+                                <div className="alert alert-danger">
+                                    {this.state.errorMessage}
+                                </div>
+                            )}
+
                             {/* First Name */}
                             <FormGroup row>
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
@@ -183,7 +198,6 @@ class Contact extends Component {
         );
     }
 }
-
 
 const mapDispatchToProps = {
     addComment: (comment) => addComment(comment)  
