@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Ristorante Con Fusion"
+    />
+    <!-- Local paths for CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    <title>Ristorante Con Fusion</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        const apiBase = window.location.port === '3000' ? 'http://localhost:3001' : '';
+        const statusDiv = document.createElement('div');
+        statusDiv.style.padding = '20px';
+        statusDiv.style.margin = '20px';
+        statusDiv.style.border = '1px solid #ccc';
+        statusDiv.style.borderRadius = '5px';
+        statusDiv.innerHTML = '<h3>API Connection Status</h3><p>Checking connection to JSON server...</p>';
+        document.body.appendChild(statusDiv);
+        
+        const endpoints = [
+          `${apiBase}/dishes`,
+          `${apiBase}/api/dishes`,
+          '/dishes',
+          '/api/dishes'
+        ];
+        
+        let successfulEndpoint = null;
+        let attempts = 0;
+        
+        function tryNextEndpoint() {
+          if (attempts >= endpoints.length) {
+            if (!successfulEndpoint) {
+              showConnectionError();
+            }
+            return;
+          }
+          
+          const endpoint = endpoints[attempts];
+          statusDiv.innerHTML += `<p>Trying: ${endpoint}...</p>`;
+          
+          fetch(endpoint)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error ${response.status}`);
+              }
+              successfulEndpoint = endpoint;
+              statusDiv.innerHTML += `<p style="color:green">✓ Successfully connected to ${endpoint}</p>`;
+              return response.json();
+            })
+            .then(data => {
+              statusDiv.innerHTML += `<p>Found ${data.length} dishes</p>`;
+              
+          
+              if (window.location.port === '3000') {
+                statusDiv.innerHTML += `
+                  <div style="background-color:#f8f9fa;padding:10px;margin-top:10px;border-radius:5px">
+                    <p><strong>Developer Note:</strong> Your API is working at ${successfulEndpoint}</p>
+                    <p>To fix your React app, make sure all fetch requests use this base URL: <code>${apiBase}</code></p>
+                    <p>Example: <code>fetch('${apiBase}/dishes')</code> instead of <code>fetch('/dishes')</code></p>
+                  </div>`;
+              }
+            })
+            .catch(error => {
+              statusDiv.innerHTML += `<p style="color:orange">✗ ${endpoint} failed: ${error.message}</p>`;
+              attempts++;
+              tryNextEndpoint();
+            });
+        }
+        
+        function showConnectionError() {
+          statusDiv.innerHTML += `
+            <div style="color:red;padding:10px;border:1px solid red;margin-top:10px;border-radius:5px">
+              <p><strong>Error connecting to API</strong></p>
+              <p>Possible solutions:</p>
+              <ol>
+                <li>Make sure server.js is running: <code>node server.js</code></li>
+                <li>Verify server is running on port 3001</li>
+                <li>Check that db.json exists and has a "dishes" array</li>
+                <li>If React app is running on port 3000, try updating your fetch code:</li>
+                <code>const apiUrl = 'http://localhost:3001';</code><br>
+                <code>fetch(apiUrl + '/dishes')...</code>
+              </ol>
+              <p><button onclick="location.reload()">Try Again</button></p>
+   
