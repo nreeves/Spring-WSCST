@@ -15,9 +15,16 @@ function RenderCard({item, isLoading, errMess}) {
         );
     }
     else if (item) {
+        // Fix image path handling
+        const imagePath = item.image ? 
+            (item.image.startsWith('http') ? item.image : 
+             item.image.startsWith('/') ? baseUrl + item.image :
+             baseUrl + '/' + item.image) : 
+            'https://via.placeholder.com/300?text=No+Image';
+            
         return (
             <Card>
-                <CardImg src={baseUrl + item.image} alt={item.name} />
+                <CardImg src={imagePath} alt={item.name} />
                 <CardBody>
                     <CardTitle>{item.name}</CardTitle>
                     {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}

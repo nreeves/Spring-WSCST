@@ -2,6 +2,7 @@ import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
 // DISHES ACTIONS
+// This function fetches dishes from the API
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
 
