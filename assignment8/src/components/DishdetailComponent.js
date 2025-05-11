@@ -3,7 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Button, Modal, ModalHeade
 import { Loading } from './LoadingComponent';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link, useParams } from 'react-router-dom';
-
+import { baseUrl } from '../shared/baseUrl';
 
 const required = (val) => val && val.length;
 
@@ -11,7 +11,7 @@ function RenderDish({ dish }) {
     if (dish != null) {
         return (
             <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
@@ -171,4 +171,4 @@ const DishDetail = (props) => {
     );
 };
 
-export default DishDetail; 
+export default DishDetail;

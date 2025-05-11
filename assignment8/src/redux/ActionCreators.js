@@ -1,6 +1,5 @@
 import * as ActionTypes from './ActionTypes';
-
-const baseUrl = 'http://localhost:5000';
+import { baseUrl } from '../shared/baseUrl';
 
 // DISHES ACTIONS
 export const fetchDishes = () => (dispatch) => {

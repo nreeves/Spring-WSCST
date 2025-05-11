@@ -11,6 +11,7 @@ const jsonServer = spawn('node', ['server.js'], {
 console.log('JSON Server started. Now starting React app...');
 
 // Wait 2 seconds before starting React app to ensure JSON server is ready
+// CORS headers are configured in server.js to allow access from React app
 setTimeout(() => {
   // Start the React app
   const reactApp = spawn('npm', ['start'], {

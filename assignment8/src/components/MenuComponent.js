@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap';
 import { Link } from 'react-router-dom'; 
-
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderMenuItem({ dish }) {
   return (
@@ -10,7 +10,7 @@ function RenderMenuItem({ dish }) {
         <Card> 
           <CardImg 
             width="100%" 
-            src={dish.image} 
+            src={baseUrl + dish.image} 
             alt={dish.name} 
           />
           <CardBody>
