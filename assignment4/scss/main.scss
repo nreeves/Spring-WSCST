@@ -1,0 +1,15 @@
+// Import Bootstrap functions and variables first
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+// Add your custom color to the theme map
+$custom-colors: (
+  "myprimary": #5133a5,  // Define a new color
+  "mysecondary": #d1c6e8
+);
+
+// Merge with Bootstrap’s default theme colors
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+// Import Bootstrap core styles
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

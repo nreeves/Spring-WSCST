@@ -1,0 +1,70 @@
+// Variables
+$primary-color: #512DA8;
+$secondary-color: #9575CD;
+$light-color: #D1C4E9;
+$dark-color: #0f0f0f;
+$bg-pale: #D1C4E9;
+
+// Base styles
+body {
+  padding: 50px 0px 0px 0px;
+  z-index: 0;
+}
+
+.navbar-dark {
+  background-color: $primary-color;
+}
+
+.jumbotron {
+  padding: 70px 30px;
+  margin: 0px auto;
+  background: $secondary-color;
+  color: floralwhite;
+}
+
+.row-header {
+  margin: 0px auto;
+  padding: 0px;
+}
+
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
+  min-height: 400px;
+}
+
+.footer {
+  background-color: $light-color;
+  margin: 0px auto;
+  padding: 20px 0px;
+  
+  a {
+    color: $dark-color;
+    text-decoration: none;
+    
+    &:hover {
+      color: $primary-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+address {
+  font-size: 80%;
+  margin: 0px;
+  color: $dark-color;
+}
+
+// Custom styles for images
+#buffet, #alberto {
+  max-width: 100%;
+  height: auto;
+}
+
+// Media queries
+@media (max-width: 768px) {
+  .jumbotron {
+    padding: 30px;
+  }
+}

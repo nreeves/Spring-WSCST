@@ -1,0 +1,15 @@
+{
+  "name": "restaurant-website",
+  "version": "1.0.0",
+  "description": "Restaurant website for assignment",
+  "main": "index.html",
+  "scripts": {
+    "scss": "sass --watch assets/scss:assets/css"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "sass": "^1.69.7"
+  }
+}
